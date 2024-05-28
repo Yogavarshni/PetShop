@@ -21,8 +21,8 @@ services:
       - docker-elk
 
   backend:
-    image: petproject-backend1
-    container_name: container-backend
+    image: pet-backend:latest
+    container_name: pet-backend-container
     ports:
       - "8082:8082"
     environment:
@@ -35,15 +35,16 @@ services:
       elasticsearch:
         condition: service_healthy
 
-  frontend:
-    image: petproject-frontend
-    container_name: container-frontend
-    ports:
-      - "80:80"
-    networks:
-      - docker-elk
-    depends_on:
-      - backend
+  # frontend:
+  #   image: petproject-frontend
+  #   container_name: container-frontend
+  #   ports:
+  #     - "80:80"
+  #   networks:
+  #     - docker-elk
+  #   depends_on:
+  #     - backend
+  
 networks:
   docker-elk:
     driver: bridge
