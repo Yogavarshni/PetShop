@@ -21,7 +21,7 @@ services:
       - docker-elk
 
   backend:
-    image: pet-backend:latest
+    image: yogavarshni/petshop:backend
     container_name: pet-backend-container
     ports:
       - "8082:8082"
