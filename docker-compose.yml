@@ -2,7 +2,7 @@ version: '3'
 services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.8.0
-    container_name: elasticsearch8
+    container_name: elasticsearch880
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
@@ -22,11 +22,11 @@ services:
 
   backend:
     image: yogavarshni/petshop:backend
-    container_name: pet-backend-container
+    container_name: pet-backend-cont
     ports:
       - "8082:8082"
     environment:
-      - ELASTICSEARCH_HOST=elasticsearch8
+      - ELASTICSEARCH_HOST=elasticsearch880
       - ELASTICSEARCH_PORT=9200
     #      - "SPRING_DATA_ELASTICSEARCH_URIS=http://host.docker.internal:9200"
     networks:
@@ -34,16 +34,6 @@ services:
     depends_on:
       elasticsearch:
         condition: service_healthy
-
-  # frontend:
-  #   image: petproject-frontend
-  #   container_name: container-frontend
-  #   ports:
-  #     - "80:80"
-  #   networks:
-  #     - docker-elk
-  #   depends_on:
-  #     - backend
   
 networks:
   docker-elk:
