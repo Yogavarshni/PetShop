@@ -16,9 +16,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
@@ -32,7 +30,19 @@ jobs:
     - name: Build and Push Docker Image
       uses: mr-smithers-excellent/docker-build-push@v4
       with:
-        image: yogavarshni/petshop
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Set up Docker Compose
+      run: docker compose -f docker-compose.yl up -d
+    - name: Build and push image
+      working-directory: .
+      run: |
+        mvn --batch-mode --update-snapshots verify
+        docker build -t yogavarshni:petproject:latest
+        docker push yogavarshni/petproject
+    - name: Show Docker images
+      run: docker images
+    - name: Tear down docker compose
+      run: docker-compose -f docker-compose.yml down
+      
