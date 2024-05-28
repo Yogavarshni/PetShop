@@ -34,7 +34,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Set up Docker Compose
-      run: docker compose -f docker-compose.yl up -d
+      run: docker compose -f docker-compose.yml up -d
     - name: Build and push image
       working-directory: .
       run: |
