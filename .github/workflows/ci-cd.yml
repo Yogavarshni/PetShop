@@ -39,7 +39,7 @@ jobs:
       working-directory: .
       run: |
         mvn --batch-mode --update-snapshots verify
-        docker build -t yogavarshni:petproject:latest
+        docker build -t yogavarshni:petproject:latest .
         docker push yogavarshni/petproject
     - name: Show Docker images
       run: docker images
