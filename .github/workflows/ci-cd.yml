@@ -38,7 +38,6 @@ jobs:
     - name: Build and push image
       working-directory: .
       run: |
-        mvn --batch-mode --update-snapshots verify
         docker build -t yogavarshni/petshop:backend .
         docker push yogavarshni/petshop:backend
     - name: Show Docker images
